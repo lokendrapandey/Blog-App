@@ -43,7 +43,7 @@ export class AuthService {
         try {
             return this.account.createOAuth2Session(
                 "google",
-                "https://blog-app-kappa-steel.vercel.app/all-post",
+                "https://blog-app-kappa-steel.vercel.app/all-posts",
                 "https://blog-app-kappa-steel.vercel.app//login"
             );
         } catch (err) {
