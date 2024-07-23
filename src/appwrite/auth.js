@@ -43,8 +43,8 @@ export class AuthService {
         try {
             return this.account.createOAuth2Session(
                 "google",
-                "http://localhost:5173",
-                "http://localhost:5173/login"
+                "https://blog-app-kappa-steel.vercel.app/all-post",
+                "https://blog-app-kappa-steel.vercel.app//login"
             );
         } catch (err) {
             console.log("error in google login", err);
