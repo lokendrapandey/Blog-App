@@ -6,21 +6,26 @@ import {Button, Input, Logo} from './index.js'
 import {useDispatch} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import Loader from './Loader.jsx'
+import { FcGoogle } from "react-icons/fc";
+
 
 function Signup() {
     const navigate = useNavigate()
     const [error, setError] = useState("")
     const dispatch = useDispatch()
     const {register, handleSubmit} = useForm()
+    const [loading ,setLoading]=useState(false)
 
     const create = async(data) => {
         setError("")
+        setLoading(true)
         try {
             const userData = await authService.createAccount(data)
             if (userData) {
                 const userData = await authService.getCurrentUser()
                 if(userData) dispatch(login(userData));
                 navigate("/")
+                setLoading(false)
             }
         } catch (error) {
             setError(error.message)
@@ -91,11 +96,13 @@ function Signup() {
                             required: true,})}
                         />
                         <Button type="submit" className="w-full">
-                            Create Account
+                            {loading?<Loader/>:"Create Account"}
                         </Button>
                     </div>
                 </form>
-                <Button className='bg-red-600 w-full flex justify-center items-center text-3xl mt-3' onClick={handlegooglelogin}>Google</Button>
+                {/* <Button className='bg-red-600 w-full flex justify-center items-center text-3xl mt-3' onClick={handlegooglelogin}>Google</Button> */}
+                <Button className='bg-gray-300 w-full flex justify-center items-center text-3xl mt-3' onClick={handlegooglelogin}> <FcGoogle /></Button>
+
             </div>
 
     </div>

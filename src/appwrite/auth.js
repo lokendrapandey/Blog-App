@@ -45,6 +45,9 @@ export class AuthService {
                 "google",
                 "https://blog-app-kappa-steel.vercel.app/all-posts",
                 "https://blog-app-kappa-steel.vercel.app//login"
+                // "google",
+                // "http://localhost:5173/all-posts",
+                // "http://localhost:5173/login"
             );
         } catch (err) {
             console.log("error in google login", err);

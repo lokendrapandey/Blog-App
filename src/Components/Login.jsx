@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux"
 import authService from "../appwrite/auth"
 import { useForm } from "react-hook-form"
 import Loader from './Loader.jsx'
+import { FcGoogle } from "react-icons/fc";
+
 
 function Login() {
     const navigate = useNavigate()
@@ -16,12 +18,14 @@ function Login() {
 
     const login = async (data) => {
         setError("")
+        setLoading(true)
         try {
             const session = await authService.login(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
                 if (userData) dispatch(authLogin(userData));
                 navigate("/")
+                setLoading(false)
             }
         } catch (error) {
             setError(error.message)
@@ -68,10 +72,10 @@ function Login() {
                                 } })} />
                         <Input label="Password: " type="password" placeholder="Enter your password" {...register("password", { required: true, })} />
                        
-                        <Button type="submit" className="w-full" > {loading ? <Loader /> : "Create Account"}</Button>
+                        <Button type="submit" className="w-full" > {loading ? <Loader /> : "Login"}</Button>
                     </div>
                 </form>
-                <Button className='bg-red-600 w-full flex justify-center items-center text-3xl mt-3' onClick={handlegooglelogin}>Google</Button>
+                <Button className='bg-gray-300 w-full flex justify-center items-center text-3xl mt-3' onClick={handlegooglelogin}> <FcGoogle /></Button>
 
             </div>
         </div>
